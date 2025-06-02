@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
+import { Form } from '@/components/ui/form';
 import { PersonalInfoSection } from '@/components/tax-form/PersonalInfoSection';
 import { IncomeSection } from '@/components/tax-form/IncomeSection';
 import { TaxCalculationSection } from '@/components/tax-form/TaxCalculationSection';
@@ -171,31 +172,33 @@ const TaxForm = () => {
             </div>
           </div>
 
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <CurrentSectionComponent form={form} />
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <CurrentSectionComponent form={form} />
 
-            {/* Navigation */}
-            <div className="flex justify-between pt-6 border-t">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={prevSection}
-                disabled={currentSection === 0}
-              >
-                Previous
-              </Button>
-              
-              {currentSection === sections.length - 1 ? (
-                <Button type="submit" className="bg-green-600 hover:bg-green-700">
-                  Submit Tax Return
+              {/* Navigation */}
+              <div className="flex justify-between pt-6 border-t">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={prevSection}
+                  disabled={currentSection === 0}
+                >
+                  Previous
                 </Button>
-              ) : (
-                <Button type="button" onClick={nextSection}>
-                  Next
-                </Button>
-              )}
-            </div>
-          </form>
+                
+                {currentSection === sections.length - 1 ? (
+                  <Button type="submit" className="bg-green-600 hover:bg-green-700">
+                    Submit Tax Return
+                  </Button>
+                ) : (
+                  <Button type="button" onClick={nextSection}>
+                    Next
+                  </Button>
+                )}
+              </div>
+            </form>
+          </Form>
         </div>
       </div>
     </div>
